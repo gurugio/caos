@@ -1,0 +1,10 @@
+
+[ Paging Tables Building ]
+
+2009.1.20 gurugio
+
+
+- Paging-table building referes "linux/arch/x86_64/kernel/machine_kexec.c"
+
+
+

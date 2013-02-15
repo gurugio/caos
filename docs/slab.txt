@@ -1,0 +1,28 @@
+
+[ Slab Memory Allocator ]
+
+2009.1.20 gurugio
+
+
+
+
+1. create new cachep - kmem_cache_create()
+
+When a new cache descriptor is need, kmem_cache_create() creates a new cache. 
+There is cache_cache table, which is array of cache descriptor, and kmem_cache_create() allocate a descriptor from cache_cache table.
+
+
+2. allocate objects to cache - kmem_cache_grow()
+
+If no object is free or cache has no object, kmem_cache_grow() create new slab and free objects.
+
+3. free objects of cache - kmem_cache_shrink()
+
+kmem_cache_shrink() deletes a slab, if all objects in the slab is free.
+
+4. free a slab - slab_destroy()
+
+Free pages that the slab and objects are included.
+
+
+

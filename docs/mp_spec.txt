@@ -1,0 +1,97 @@
+
+
+
+[ Intel Multiprocessor Specification v1.4, May, 1997 요약 ]
+
+
+2009.1.20 gurugio
+
+
+- 모든 Local APIC/IO-APIC는 ID레지스터를 가지고, APIC들은 서로간의 독자적인 ID를 가지고, ID로 식별된다.
+
+- 시스템 메모리 영역중에서 0xA0000~0xFFFFF와 0xFFFE0000~0xFFFFFFFF 영역을 IO 장치와 BIOS 영역으로 예약한다.
+
+- 멀티프로세서 시스템에서 BIOS는 모든 프로세서와 APIC 등의 멀티프로세서 장치들을 인식하고 configuration 정보를 메모리에 저장하는 역할을 한다. (MP floating pointer)
+
+- OS 개발자는 MP specification 1.4 문서의 3,4,5, Appendix A,B 를 읽고 바이오스와 OS의 상관관계를 이해해야 한다.
+
+
+- APIC가 사용하는 메모리 영역은 0xFEC0 0000 과 0xFEE0 0000 이다.
+
+- System memory address map
+
+0000 0000 ~ System-based memory
+000A 0000 ~ Video buffer
+000C 0000 ~ Rom extensions
+000D 0000 ~ Expansion rom
+000E 0000 ~ Shadowed expansion BIOS
+000F 0000 ~ Shadowed BIOS
+0010 0000 ~ Extended memory region, memory-mapped IO space
+FEC0 0000 ~ IO APIC (shareable by all processors)
+FED0 0000 ~ Memory-mapped IO devices
+FEE0 0000 ~ Local APIC (accesable only for its own processor)
+FEF0 0000 ~ Memory-mapped IO devices
+FFFE 0000 ~ BIOS PROM
+
+
+- Local APIC는 82489DX APIC 칩으로도 만들어질 수 있고, 프로세서 내부에서 구현될 수도 있다. Loca APIC Version 레지스터를 읽었을 때, 0x0? 값이면 82489DX APIC이고, 0x1? 값이면 프로세서 내부 APIC 인 것을 알 수 있다.
+
+- Local APIC의 프로그래밍 순서
+1. 0부터 시작되는 8비트 ID 값 할당 (optional, 바이오스가 정해줌)
+2. logical destination 할당
+3. APIC spurios 벡터 값 할당, 0x?F 값이 되야 함 (?는 4비트 16진수)
+4. IO APIC의 인터럽트 입력 신호의 polarity 지정
+5. STARTUP IPI 정의 --> Appendix B.4 참고
+
+- 인터럽트 모드
+1. PIC mode - 모든 APIC를 무시하고 싱글 프로세서 모드로 동작함
+2. Virtual Wire Mode - APIC를 가상의 연결선으로 사용하고 PIC 모드와 동일하게 동작
+3. Symmetric IO mode - 시스템이 여러개의 프로세서를 사용하도록함
+
+- OS 개발자는 Appendix B를 확인하여 Symmetric IO mode의 초기화에 대한 정보를 얻도록 한다.
+
+- PIC mode는 모든 APIC를 사용하지 않고 인터럽트가 곧바로 프로세서로 전달된다. IMCR (Interrupt mode configuration register) 를 수정해서 다른 모드로 바꿀 수 있다.
+
+- Symmetric IO mode로 진입하기 위한 순서
+1. IMCR 이 지원되는지 확인
+2. IO APIC Redirection 활성화
+3. 0x22 포트에 0x70 값 쓰기 (IMCR 선택)
+4. 0x23 포트에 0x01 값 쓰기 (Symmetric 선택)
+
+
+- Virtual wire mode 는 하나의 프로세서의 Local APIC를 활성화한다. 인터럽트는 8259를 통해서 Local APIC의 LINTIN0 으로 전달된다. 이 모드에서 IO APIC는 사용되지 않는다. 하지만 IO APIC를 사용하도록 프로그램할 수 있다.
+
+- Symmetric IO Mode
+ - 하나 이상의 IO APIC가 동작해야 함
+ - IO APIC가 IO 인터럽트를 요청하고 8259 라인은 무시됨
+ - IO APIC의 인터럽트 라인은 시스템 구성에 따라 다르게 구현됨
+
+
+- 바이오스는 시스템의 멀티프로세서 설정 정보를 메모리에 저장해준다. Floating pointer strcuture는 어디에 정보가 저장되어 있는지 알려주고, MP configuration table은 시스템 구성에 대한 정보가 저장되어 있다. 이 정보를 읽는 방법은 mp_spec.c 파일의 smp_read_mpc 함수를 참고한다.
+
+- OS 프로그래밍 가이드
+ - 부팅 후 AP는 halt 상태이며 인터럽트를 무시한다. AP는 오직 INIT IPI와 STARTUP IPI에만 반응한다.
+ - BSP는 가장 먼저 MP floating table과 MP configuration table을 읽어서 시스템 구성 정보를 확인해야 한다.
+ - 부팅 직후에는 인터럽트 모드가 PIC mode 혹은 Virtual wire mode 가 된다. OS는 인터럽트 모드를 Symmetric IO mode로 바꿔서 멀티 프로세서가 동작하도록 한다. (이것은 AP를 깨운 후에 실행해도 됨)
+ - 그후에 BSP의 local APIC를 동작시킨다. local APIC가 동작해야만 AP를 깨우는 IPI를 발생시킬 수 있다. local APIC는 아직 인터럽트가 마스킹된 상태이다.
+ - INIT IPI와 STARTUP IPI를 전송해서 AP를 실행시킨다. 
+
+
+
+
+(보다 더 자세한 사항이 많으므로 Intel Multiprocessor Specification을 반드시 읽어볼 것)
+
+(실질적인 동작 코드는 인텔 메뉴얼을 참고할 것)
+
+(Local APIC는 프로세서 메뉴얼에서 설명하지만 IO APIC는 프로세서 밖에 존재하기 때문에 프로세서 메뉴얼에서 다루지 않는다. 인터넷에서 다른 문서들을 찾을 것)
+
+
+
+- references
+1. Intel Multiprocessor Specification v1.4, May, 1997
+2. Linux SMP HOWTO v1.4, July, 2002
+
+
+
+
+

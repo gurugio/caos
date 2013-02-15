@@ -1,0 +1,150 @@
+LOCK by   <0>
+PREEMPT=2
+UNLOCK by <0>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>
+   LOCK by   <1>
+PREEMPT=1
+   UNLOCK by <1>
+LOCK by   <0>
+PREEMPT=1
+UNLOCK by <0>

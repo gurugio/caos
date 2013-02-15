@@ -1,0 +1,29 @@
+[ Run CaOS in qemu ]
+
+2009.2.9 gurugio
+
+
+1. qemu options
+
+ -L: qemu BIOS directory. (for Windows)
+ -m: memory size
+ -fda <image file>: floppy disk image
+ -boot a: 'a' means floppy drive booting
+ -smp #: processor count (max 2)
+
+
+2. Linux
+
+Move to CaOS source directory.
+
+$ qemu-system-x86_64 -m 128 -fda ./floppy.img -boot a -smp2
+
+3. Windows
+
+Move to CaOS source directory and set PATH to qemu directory.
+BIOS path should be defined.
+
+> qemu-system-x86_64.exe -L <qemu directory> -m 128 -fda floppy.img -boot a -smp 2
+
+
+

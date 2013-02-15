@@ -1,0 +1,56 @@
+[ Code Flow ]
+
+
+2009.1.20 gurugio
+
+
+1. bootsec.asm 
+
+ - Loads setup.asm and kernel image into physical memory.
+ - Print 'C' on screen. 
+
+2. setup.asm
+ + [16bit mode]
+ - int 0x15, EAX=0xEC00, EBX=2 : tell BIOS that operating mode will be Long Mode
+ - Print 'a' on screen
+ - Set setup_msg variable zero
+ - Build GDT at 0x8000 which is used only assembly language booting stage
+ - Load GDT address into GDTR
+ - Set PE bit in CR0
+
+ + [32bit mode]
+ - Set booting-stack at 0xA0000 (At least 0x98000~0xA0000 area should be free)
+ - Set PAE bit in CR4
+ - Build PML4 table at 0x90000, PML4[0] = PML[128] = PDP address
+ - Build PDP table at 0x91000, PDP[0] = PDE address
+ - Build PDE table at 0x92000, PDE[0] = PTE0, PDE[1] = PTE1, PDE[2] = PTE2, PDE[3] = PTE3
+ - Build PTE0~3 tables at 0x93000, 0x94000, 0x95000, 0x96000
+   + Now physical memory address 0~8MB is mapped to linear address 0~8MB and also 0xFFFF800000000000~0xFFFF800000800000
+ - Load PML4 address into CR3
+ - Set EFER.LME bit in MSR 0xC0000080 to activate long-mode
+ - Set PG bit in CR0 to enable paging
+
+ + [64bit mode]
+ - Check that LMA bit in EFER is been setted.
+ - Set PAE, PGE bit in CR4 in order to flush TLB
+ - Set SCE bit in EFER
+ - Copy kernel image from 0xA000 to 0x100000
+ - Set kernel stack at KERNEL_STACK_START (0xFFFF800000000000 + 2MB)
+ - Print 'L' on screen
+ - Jump to start_kernel function with processor index as parameter 
+
+3. main.c
+ - Initialize screen output and printf is available, init_screen()
+ + Architecture-dependent setup, setup_arch()
+   - Init booting-memory manager, bootmem_init()
+   - Build GDT, IDT again, gdt_init(), idt_init(), irq_init()
+   - Build pageing-tables again, paging_init()
+   - Build mem_map and memory zones, mem_map_init(), memory_init()
+     + Page-allocation and byte-size allocation are available
+   - Read data-tables to init SMP, smp_init()
+   - Setup PIC8259, pic8259_init()
+   - Init local APIC of BSP and setup local timer, init_local_apic(), init_bsp_timer()
+   - Wake up the second processor
+ - Setup keyboard input with IRQ 0x1 through PIC8259, keyboard_init()
+ - Accept IRQs, sti()
+ - End of kernel booting

@@ -1,0 +1,30 @@
+
+[ Essential Kernel Symbols ]
+
+2009.1.20 gurugio
+
+
+
+KERNEL_STACK_START   equ 0xffff800000200000 
+
+- Kernel image ends and kernel-stack pointer is grow from it.
+
+
+KERNEL_VMA           equ 0xffff800000100000
+
+- linear address that kernel exists
+
+
+Follow addresses are section address of kernel image
+
+_bss                 equ 0xffff800000104000
+_bss_end             equ 0xffff800000105160
+_code                equ 0xffff800000100000
+_code_end            equ 0xffff800000102000
+_data                equ 0xffff800000102000
+_data_end            equ 0xffff800000103000
+_ehframe             equ 0xffff800000103370
+_ehframe_end         equ 0xffff800000104000
+_kernel_end          equ 0xffff800000105160
+
+
