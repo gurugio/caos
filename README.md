@@ -1,4 +1,3 @@
--*- text -*-
 
 CaOS64 (Calcium OS for 64bit x86_64)
 
@@ -8,17 +7,17 @@ More calcium, better health and better programming
 
 features
 ========
-32bit protected mode/64bit long mode
-segmentation and paging
-context switching of three user-mode processes
-keyboard and timer interrupt handler
-support dual-core processor and up to 512MB physical memory
-dynamic memory allocation with slab memory manager
-Keyboard IRQ handler
-Local timer IRQ handler for each processor
+* 32bit protected mode/64bit long mode
+* segmentation and paging
+* context switching of three user-mode processes
+* keyboard and timer interrupt handler
+* support dual-core processor and up to 512MB physical memory
+* dynamic memory allocation with slab memory manager
+* Keyboard IRQ handler
+* Local timer IRQ handler for each processor
 
 
-Licensing
+License
 =========
 CaOS64 is released under the General Public License (GPL).
 For more licensing information, see
