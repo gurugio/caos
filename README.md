@@ -1,8 +1,11 @@
 
 CaOS64 (Calcium OS for 64bit x86_64)
+====================================
 
-CaOS64 is a very small operating system for x86_64 multiprocessor platform.
-I hope that CaOS64 may provide calcium nutrition system-programmer need.
+CaOS64 is a study-kernel for x86_64 multiprocessor platform.
+
+I hope that CaOS64 may provide the energy like calcium nutrition for system-programmers
+
 More calcium, better health and better programming
 
 features
