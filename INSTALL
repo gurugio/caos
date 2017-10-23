@@ -1,15 +1,11 @@
-
+How to build kernel image
 1. install 64bit gcc/ld/objcopy
 eg) x86_64-pc-elf-gcc, x86_64-pc-linux-ld, x86_64-pc-linux-objcopy
-
-2. modify GCC64, LD64, OBJCOPY64 variables in Makefile
-
-3. install nasm v2.0 or more recent version
-
-4. necessary utilities: gtags, nm, objdump
-
-5. run ./configure
-
-6. run make
-
+2. install nasm v2.0 or more recent version
+3. necessary utilities: gtags, nm, objdump
+4. $ autoconf
+4.1 configure is generated
+5. $ ./configure
+5.1 config.mk is generated
+6. $ make
 7. check floppy.img, disasm.txt system.map in image directory
