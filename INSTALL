@@ -9,3 +9,4 @@ eg) x86_64-pc-elf-gcc, x86_64-pc-linux-ld, x86_64-pc-linux-objcopy
 5.1 config.mk is generated
 6. $ make
 7. check floppy.img, disasm.txt system.map in image directory
+8. $ bash run.sh (on Linux) or run.bat (on Windows)
